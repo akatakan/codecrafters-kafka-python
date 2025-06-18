@@ -12,7 +12,7 @@ def main():
     corr_id = int.from_bytes(received_message[8:12]).to_bytes(4)
     error_code = (3).to_bytes(2, signed=True)
     desc = int.from_bytes(received_message[24:30]).to_bytes(6)
-    print(f"Description: {desc}")
+    print(f"Description: {corr_id}")
     message = (
         corr_id
         +error_code
