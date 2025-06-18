@@ -11,7 +11,7 @@ def main():
     message_size = (35).to_bytes(4, signed=True)
     request_api_key = (18).to_bytes(2, signed=True)
     request_api_version = (4).to_bytes(2, signed=True)
-    correlation_id = (1870644833).to_bytes(4, signed=True)
+    correlation_id = (1870644833).to_bytes(4, signed=True).hex()
     connection.sendall(message_size+request_api_key+request_api_version+correlation_id)  # send 0 to client
 
 
