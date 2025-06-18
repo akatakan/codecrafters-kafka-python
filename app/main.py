@@ -3,8 +3,10 @@ import threading  # noqa: F401
 
 def send_message(connection):
     connection,_ = connection
-    received_message = connection.recv(1024)
-    while received_message:
+    while True:
+        received_message = connection.recv(1024)
+        if not received_message:
+            break
         api_key = int.from_bytes(received_message[4:6], signed=True)
         api_version = int.from_bytes(received_message[6:8])
         corr_id = int.from_bytes(received_message[8:12]).to_bytes(4)
