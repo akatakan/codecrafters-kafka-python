@@ -11,7 +11,7 @@ def main():
     api_key = int.from_bytes(received_message[4:6], signed=True)
     api_version = int.from_bytes(received_message[6:8])
     corr_id = int.from_bytes(received_message[8:12]).to_bytes(4, signed=True)
-    error_code = (0 if 0 <= api_version < 4 else 35).to_bytes(2, signed=True)  # 35 is the error code for "Unsupported version"
+    error_code = (0 if 0 <= api_version <= 4 else 35).to_bytes(2, signed=True)  # 35 is the error code for "Unsupported version"
     num_of_apikeys = (len([api_key])+1).to_bytes(1, signed=False)
     message = (
         corr_id
