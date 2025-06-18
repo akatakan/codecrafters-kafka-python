@@ -8,8 +8,8 @@ def main():
     server = socket.create_server(("localhost", 9092), reuse_port=True)
     connection,_ = server.accept() # wait for client
     received_message = connection.recv(1024)
-    print(f"Received message: {received_message}")
-
+    send_message = int.from_bytes(received_message[8:12])
+    connection.sendall(send_message.to_bytes(4, signed=True))
 
 if __name__ == "__main__":
     main()
