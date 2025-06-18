@@ -35,7 +35,7 @@ def main():
     server = socket.create_server(("localhost", 9092), reuse_port=True)
     while True:
         client= server.accept()
-        threading.Thread(send_response, args=(client,)).start()
+        threading.Thread(target=send_response, args=(client,)).start()
     
 if __name__ == "__main__":
     main()
