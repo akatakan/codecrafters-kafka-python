@@ -10,11 +10,12 @@ def main():
     connection , _ = server.accept()
     received_message = connection.recv(1024)
     corr_id = int.from_bytes(received_message[8:12]).to_bytes(4,signed=True)
-    topic = int.from_bytes(received_message[36:40]).to_bytes(3,signed=True)
-    print(f"Description: {topic}")
+    topic_name = int.from_bytes(received_message[36:40]).to_bytes(3,signed=True)
     message = (
         corr_id
-        +topic
+        +(3).to_bytes(2, signed=True)
+        +topic_name
+        +(0).to_bytes(16, signed=True)
     )
         
     connection.sendall(
