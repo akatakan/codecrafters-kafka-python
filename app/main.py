@@ -10,9 +10,8 @@ def main():
     connection , _ = server.accept()
     received_message = connection.recv(1024)
     corr_id = int.from_bytes(received_message[8:12]).to_bytes(4,signed=True)
-    error_code = (3).to_bytes(2, signed=True)
-    desc = int.from_bytes(received_message[24:30]).to_bytes(6,signed=True)
-    print(f"Description: {corr_id}")
+    desc = int.from_bytes(received_message[35:40]).to_bytes(6,signed=True)
+    print(f"Description: {desc}")
     message = (
         corr_id
         +error_code
