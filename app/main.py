@@ -3,7 +3,7 @@ import threading  # noqa: F401
 
 def send_response(connection):
     while True:
-        received_message = connection.recv(1024)
+        received_message = connection[0].recv(1024)
         if not received_message:
             print("No message received, closing connection.")
             break
