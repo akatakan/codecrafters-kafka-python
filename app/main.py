@@ -1,12 +1,7 @@
 import socket  # noqa: F401
+import threading  # noqa: F401
 
-
-def main():
-
-    print("Logs from your program will appear here!")
-
-    server = socket.create_server(("localhost", 9092), reuse_port=True)
-    connection,_ = server.accept() # wait for client
+def send_response(connection):
     while True:
         received_message = connection.recv(1024)
         if not received_message:
@@ -32,6 +27,15 @@ def main():
             len(message).to_bytes(4, signed=False)
             +message
         )
+
+def main():
+
+    print("Logs from your program will appear here!")
+
+    server = socket.create_server(("localhost", 9092), reuse_port=True)
+    while True:
+        client , = server.accept()
+        threading.Thread(send_response, args=(client,)).start()
     
 if __name__ == "__main__":
     main()
