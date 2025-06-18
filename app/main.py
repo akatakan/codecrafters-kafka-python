@@ -10,12 +10,13 @@ def main():
     received_message = connection.recv(1024)
     api_key = int.from_bytes(received_message[4:6], signed=True)
     api_version = int.from_bytes(received_message[6:8])
-    corr_id = int.from_bytes(received_message[8:12])
+    corr_id = int.from_bytes(received_message[8:12]).to_bytes(4, signed=True)
     error_code = (0 if 0 <= api_version < 4 else 35).to_bytes(2, signed=True)  # 35 is the error code for "Unsupported version"
-    api_keys = (len([api_key])+1).to_bytes(2, signed=False)
-    message = (corr_id.to_bytes(4, signed=True)
+    num_of_apikeys = (len([api_key])+1).to_bytes(1, signed=False)
+    message = (
+        corr_id
         +error_code
-        +api_keys
+        +num_of_apikeys
         +api_key.to_bytes(2, signed=True)
         +(0).to_bytes(2, signed=True)
         +(4).to_bytes(2, signed=True)
