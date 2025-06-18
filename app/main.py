@@ -13,11 +13,12 @@ def main():
     corr_id = int.from_bytes(received_message[8:12])
     error_code = (0 if 0 <= api_version < 4 else 35).to_bytes(2, signed=True)  # 35 is the error code for "Unsupported version"
     message_size = len(received_message).to_bytes(4, signed=True)
-    api_keys = len([api_key]).to_bytes(2, signed=True)
+    api_keys = (len([api_key])+1).to_bytes(2, signed=True)
     connection.sendall(message_size
         +corr_id.to_bytes(4, signed=True)
-        +(0).to_bytes(2, signed=True)
-        +api_keys+api_key.to_bytes(2, signed=True)
+        +error_code.to_bytes(2, signed=True)
+        +api_keys
+        +api_key.to_bytes(2, signed=True)
         +(0).to_bytes(2, signed=True)
         +(4).to_bytes(2, signed=True)
         +(0).to_bytes(1, signed=True)
