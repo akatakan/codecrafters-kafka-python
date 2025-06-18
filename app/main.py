@@ -22,7 +22,7 @@ def main():
         +(0).to_bytes(2, signed=True)
         +(4).to_bytes(2, signed=True)
         +(0).to_bytes(1, signed=False)
-        +(api_key_2).to_bytes(2, signed=True)
+        +(75).to_bytes(2, signed=True)
         +(0).to_bytes(2, signed=True)
         +(0).to_bytes(2, signed=True)
         +(0).to_bytes(1, signed=False)
