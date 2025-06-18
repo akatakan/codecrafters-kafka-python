@@ -10,7 +10,7 @@ def main():
     received_message = connection.recv(1024)
     corr_id = int.from_bytes(received_message[8:12])
     api_version = int.from_bytes(received_message[6:8])
-    error_code = 0 if 0< api_version < 4 else 35
+    error_code = 0 if 0 <= api_version <= 4 else 35
     message_size = len(received_message).to_bytes(4, signed=True)
     connection.sendall(message_size+corr_id.to_bytes(4, signed=True)+error_code.to_bytes(2,signed=True))
 if __name__ == "__main__":
