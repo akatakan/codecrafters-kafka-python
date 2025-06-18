@@ -12,8 +12,8 @@ def main():
     corr_id = int.from_bytes(received_message[8:12]).to_bytes(4,signed=True)
     client_len = int.from_bytes(received_message[12:14], signed=True)
     topic__name_len = int.from_bytes(received_message[15+client_len:15+client_len+1])
-    print("---->",topic__name_len)
     topic_name = int.from_bytes(received_message[15+client_len+1:topic__name_len], signed=True).to_bytes(topic__name_len, signed=True)
+    print("---->",topic_name)
     message = (
         corr_id
         +(3).to_bytes(2, signed=True)
