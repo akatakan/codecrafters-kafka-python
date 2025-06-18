@@ -16,7 +16,7 @@ def main():
     api_keys = (len([api_key])+1).to_bytes(2, signed=True)
     connection.sendall(message_size
         +corr_id.to_bytes(4, signed=True)
-        +error_code.to_bytes(2, signed=True)
+        +error_code
         +api_keys
         +api_key.to_bytes(2, signed=True)
         +(0).to_bytes(2, signed=True)
