@@ -7,7 +7,7 @@ def send_message(connection):
     while received_message:
         api_key = int.from_bytes(received_message[4:6], signed=True)
         api_version = int.from_bytes(received_message[6:8])
-        corr_id = int.from_bytes(received_message[8:12]).to_bytes(4, signed=False)
+        corr_id = int.from_bytes(received_message[8:12]).to_bytes(4, signed=True)
         api_key_2 = int.from_bytes(received_message[12:14], signed=True)
         error_code = (0 if 0 <= api_version <= 4 else 35).to_bytes(2, signed=True)
         num_of_apikeys = (3).to_bytes(1, signed=False)
