@@ -9,7 +9,7 @@ def main():
     connection,_ = server.accept() # wait for client
     received_message = connection.recv(1024)
     send_message = int.from_bytes(received_message[8:12])
-    connection.sendall(send_message.to_bytes(4, signed=True))
+    connection.sendall((send_message).to_bytes(4, signed=True))
 
 if __name__ == "__main__":
     main()
